@@ -1,5 +1,6 @@
 ﻿using MG.Framework.Core.Builders;
 using MG.Framework.Core.Entities;
+using MG.Framework.Core.IO.Enums;
 using MG.Framework.Core.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,6 +44,17 @@ public static class EntityBuilderExtensions
         ArgumentNullException.ThrowIfNull(renderOptions, nameof(renderOptions));
 
         builder.CurrentEntity.RenderOptions = renderOptions;
+
+        return builder;
+    }
+
+    public static EntityBuilder WithInputDevices(this EntityBuilder builder, params InputDevices[] inputDevices)
+    {
+        ArgumentNullException.ThrowIfNull(builder, nameof(builder));
+        ArgumentNullException.ThrowIfNull(inputDevices, nameof(inputDevices));
+
+        foreach (var inputDevice in inputDevices)
+            builder.CurrentEntity.InputDevices |= inputDevice;
 
         return builder;
     }

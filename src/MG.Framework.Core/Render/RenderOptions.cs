@@ -9,6 +9,7 @@ public class RenderOptions
     public Vector2 Position {  get; set; }
 
     #region Flags
+    public bool IsRendered { get; set; }
     public bool IsOptionsEnabled { get; set; }
     public bool PositionFromTextureCenter { get; set; }
 
