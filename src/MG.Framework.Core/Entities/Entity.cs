@@ -8,7 +8,8 @@ namespace MG.Framework.Core.Entities;
 public class Entity : EntityBase
 {
     //TODO: move params to class
-    private const float speed = 80;
+    public float Speed { get; set; } = 80;
+
     public override void Draw(SpriteBatch spriteBatch)
     {
         if (!RenderOptions.IsRendered)
@@ -39,14 +40,10 @@ public class Entity : EntityBase
     {
         var keyboardState = Keyboard.GetState();
 
-        if (keyboardState.IsKeyDown(Keys.W))
-            position.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
-        if (keyboardState.IsKeyDown(Keys.S))
-            position.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
-        if (keyboardState.IsKeyDown(Keys.D))
-            position.X += (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
-        if (keyboardState.IsKeyDown(Keys.A))
-            position.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
+        foreach (var action in KeyActions)
+        {
+            action.DoAction(this, keyboardState, gameTime);
+        }
     }
 
     private void HandleMouse()

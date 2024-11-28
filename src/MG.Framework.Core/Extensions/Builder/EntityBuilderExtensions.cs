@@ -1,6 +1,7 @@
 ﻿using MG.Framework.Core.Builders;
 using MG.Framework.Core.Entities;
 using MG.Framework.Core.IO.Enums;
+using MG.Framework.Core.IO.Modules;
 using MG.Framework.Core.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -55,6 +56,15 @@ public static class EntityBuilderExtensions
 
         foreach (var inputDevice in inputDevices)
             builder.CurrentEntity.InputDevices |= inputDevice;
+
+        return builder;
+    }
+
+    public static EntityBuilder WithDefaultKeyActions(this EntityBuilder builder)
+    {
+        ArgumentNullException.ThrowIfNull(builder, nameof(builder));
+
+        builder.CurrentEntity.KeyActions.Add(new MovementModule());
 
         return builder;
     }

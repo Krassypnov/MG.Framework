@@ -3,7 +3,7 @@ using MG.Framework.Core.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MG.Framework.Core.GameManager;
+namespace MG.Framework.Core.Game;
 
 public class GameManager
 {
@@ -13,6 +13,7 @@ public class GameManager
 
     private readonly Dictionary<string, Entity> entities;
     private readonly SpriteBatch spriteBatch;
+    private GameTime gameTime;
 
     private GameManager(SpriteBatch spriteBatch)
     {
@@ -24,6 +25,11 @@ public class GameManager
     {
         instance ??= new GameManager(spriteBatch);
 
+        return instance;
+    }
+
+    public static GameManager GetInstance()
+    {
         return instance;
     }
 
@@ -65,9 +71,14 @@ public class GameManager
 
     public void Update(GameTime gameTime)
     {
+        this.gameTime = gameTime;
+        
         foreach (var entity in entities.Values)
         {
             entity.HandleBehavior(gameTime);
         }
     }
+
+    public GameTime GetGameTime()
+        => gameTime;
 }

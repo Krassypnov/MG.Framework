@@ -1,4 +1,5 @@
 ﻿using MG.Framework.Core.IO.Enums;
+using MG.Framework.Core.IO.Modules;
 using MG.Framework.Core.Render;
 using MG.Framework.Core.Render.Interfaces;
 using Microsoft.Xna.Framework;
@@ -14,8 +15,10 @@ public abstract class EntityBase : IDrawableEntity
     public Texture2D Texture {  get; set; }
     public Color Color { get; set; }
     public RenderOptions RenderOptions { get; set; } = new();
-    public InputDevices InputDevices { get; set; } = InputDevices.None;
     public int Layer { get; set; } = 0;
+
+    public InputDevices InputDevices { get; set; } = InputDevices.None;
+    public List<KeyActionModuleBase> KeyActions { get; set; } = new();
 
     public EntityBase()
     {
@@ -24,4 +27,14 @@ public abstract class EntityBase : IDrawableEntity
 
     public abstract void HandleBehavior(GameTime gameTime);
     public abstract void Draw(SpriteBatch spriteBatch);
+
+    public void MoveX(float x)
+    {
+        position.X += x;
+    }
+
+    public void MoveY(float y)
+    {
+        position.Y += y;
+    }
 }
