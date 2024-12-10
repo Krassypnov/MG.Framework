@@ -62,12 +62,13 @@ namespace MG.Framework.App
                                           .WithRenderOptions(new RenderOptions { IsRendered = true, IsOptionsEnabled = true, PositionFromTextureCenter = true })
                                           .WithInputDevices(InputDevices.Keyboard, InputDevices.Mouse)
                                           .WithDefaultKeyActions()
+                                          .WithName("entity 1")
                                           .Build();
 
 
-            gameManager.AddEntity("entity 1", testEntity);
+            gameManager.AddEntity(testEntity);
 
-            eventManager.AddPeriodicEvent(TimeSpan.FromSeconds(1), LogEventModule.LogTime);
+            eventManager.AddPeriodicEvent(TimeSpan.FromSeconds(5), LogEventModule.LogEntities);
         }
 
         protected override void Update(GameTime gameTime)

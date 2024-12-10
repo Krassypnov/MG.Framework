@@ -41,10 +41,17 @@ public class GameManager
         return null;
     }
 
-    public void AddEntity(string entityName, Entity entity)
+    public IEnumerable<Entity> GetEntities()
     {
-        if (!string.IsNullOrWhiteSpace(entityName))
-            entities.TryAdd(entityName, entity);
+        return entities.Values;
+    }
+
+    public bool AddEntity(Entity entity)
+    {
+        if (entity == null)
+            return false;
+
+        return entities.TryAdd(entity.UniqueName, entity);
     }
 
     public void RemoveEntity(string entityName)
