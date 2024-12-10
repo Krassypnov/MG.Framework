@@ -8,9 +8,21 @@ public class EntityBuilder
 
     public Entity Build()
     {
+        //TODO: Log this
+        if (!IsEntityValid())
+            return null;
+
         var entity = CurrentEntity;
         CurrentEntity = new Entity();
 
         return entity;
+    }
+
+    private bool IsEntityValid()
+    {
+        if (string.IsNullOrWhiteSpace(CurrentEntity.UniqueName))
+            return false;
+
+        return true;
     }
 }

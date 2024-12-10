@@ -30,6 +30,15 @@ public static class EntityBuilderExtensions
         return builder;
     }
 
+    public static EntityBuilder WithName(this EntityBuilder builder, string name)
+    {
+        ArgumentNullException.ThrowIfNull(builder, nameof(builder));
+
+        builder.CurrentEntity.UniqueName = name;
+
+        return builder;
+    }
+
     public static EntityBuilder WithColor(this EntityBuilder builder, Color color)
     {
         ArgumentNullException.ThrowIfNull(builder, nameof(builder));
@@ -65,13 +74,6 @@ public static class EntityBuilderExtensions
         ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
         builder.CurrentEntity.KeyActions.Add(new MovementModule());
-
-        return builder;
-    }
-
-    public static EntityBuilder Build(this EntityBuilder builder)
-    {
-        ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
         return builder;
     }

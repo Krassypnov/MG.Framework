@@ -10,7 +10,22 @@ namespace MG.Framework.Core.Entities;
 public abstract class EntityBase : IDrawableEntity
 {
     protected Vector2 position;
+    protected string name = string.Empty;
 
+    public string UniqueName 
+    {
+        get
+        {
+            return name;
+        }
+        set
+        {
+            if (name != string.Empty)
+                return;
+            name = value;
+        } 
+    }
+    public Guid Id { get; init; }
     public Vector2 Position {  get { return position; } set { position = value; } }
     public Texture2D Texture {  get; set; }
     public Color Color { get; set; }
@@ -23,6 +38,7 @@ public abstract class EntityBase : IDrawableEntity
     public EntityBase()
     {
         Position = Vector2.Zero;
+        Id = Guid.NewGuid();
     }
 
     public abstract void HandleBehavior(GameTime gameTime);
